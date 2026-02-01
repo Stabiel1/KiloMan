@@ -56,6 +56,7 @@ const GameCanvas: React.FC<GameCanvasProps> = ({ gameState, setGameState, jumpMo
   const monstersRef = useRef<MonsterState[]>([]);
   const keysRef = useRef<{ [key: string]: boolean }>({});
   const logoRef = useRef<HTMLImageElement | null>(null);
+  const avatarRef = useRef<HTMLImageElement | null>(null);
 
   // Load Logo
   useEffect(() => {
@@ -63,6 +64,16 @@ const GameCanvas: React.FC<GameCanvasProps> = ({ gameState, setGameState, jumpMo
     img.src = '/KiloLogo.png';
     img.onload = () => {
       logoRef.current = img;
+    };
+  }, []);
+
+  // Load Player Avatar
+  useEffect(() => {
+    const img = new Image();
+    img.src = 'https://github.com/Stabiel1.png';
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      avatarRef.current = img;
     };
   }, []);
 
@@ -226,30 +237,44 @@ const GameCanvas: React.FC<GameCanvasProps> = ({ gameState, setGameState, jumpMo
     ctx.ellipse(cx, y + p.height, p.width / 1.5, 5, 0, 0, Math.PI * 2);
     ctx.fill();
 
-    // Body Color
-    ctx.fillStyle = '#eab308'; // Yellow 500
-
     // Animation Offset
     const bob = Math.sin(frameCountRef.current * 0.2) * (Math.abs(p.vx) > 0.1 ? 3 : 1);
 
     // Legs
     const legOffset = Math.sin(frameCountRef.current * 0.4) * 10 * (Math.abs(p.vx) > 0.1 ? 1 : 0);
+    ctx.fillStyle = '#eab308'; // Yellow 500
     ctx.fillRect(cx - 8 + legOffset, y + 30, 6, 20); // Left Leg
     ctx.fillRect(cx + 2 - legOffset, y + 30, 6, 20); // Right Leg
 
     // Torso
     ctx.fillRect(cx - 10, y + 15 + bob, 20, 20);
 
-    // Head
-    ctx.fillStyle = '#fef08a'; // Yellow 200
-    ctx.beginPath();
-    ctx.arc(cx, y + 10 + bob, 12, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Eyes (Directional)
-    ctx.fillStyle = '#000';
-    const eyeDir = p.facing === 1 ? 4 : -4;
-    ctx.fillRect(cx + eyeDir - 2, y + 8 + bob, 4, 4);
+    // Head - Use Avatar Image if loaded, otherwise fallback to circle
+    const avatar = avatarRef.current;
+    const headY = y + 10 + bob;
+    const headRadius = 12;
+    
+    if (avatar && avatar.complete) {
+      // Draw avatar image in a circular clip
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(cx, headY, headRadius, 0, Math.PI * 2);
+      ctx.closePath();
+      ctx.clip();
+      ctx.drawImage(avatar, cx - headRadius, headY - headRadius, headRadius * 2, headRadius * 2);
+      ctx.restore();
+    } else {
+      // Fallback to yellow circle
+      ctx.fillStyle = '#fef08a'; // Yellow 200
+      ctx.beginPath();
+      ctx.arc(cx, headY, headRadius, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Eyes (Directional)
+      ctx.fillStyle = '#000';
+      const eyeDir = p.facing === 1 ? 4 : -4;
+      ctx.fillRect(cx + eyeDir - 2, y + 8 + bob, 4, 4);
+    }
 
     ctx.restore();
   };
