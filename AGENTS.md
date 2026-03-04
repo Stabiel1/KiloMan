@@ -6,7 +6,7 @@
 
 - **Name:** black-lotus-goddess  
 - **Stack:** React 18, TypeScript, Vite, React Three Fiber (R3F), Three.js, @react-three/drei  
-- **Purpose:** 3D avatar viewer — Iggy-inspired figure with low-angle camera, moody lighting, platinum hair, black outfit, and makeup decals.
+- **Purpose:** 3D avatar viewer — Iggy-inspired figure with low-angle camera, moody lighting, platinum hair, black outfit, and makeup decals. Phase 1: avatar alive (idle breathing). Managed by Anna.
 
 ## Structure
 
