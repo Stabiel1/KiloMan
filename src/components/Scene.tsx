@@ -34,24 +34,20 @@ function CameraRig({
   return null
 }
 
-/** Luxurious dark background with soft velvet feel — gradient + subtle depth */
-function VelvetBackground() {
+/** Cyberpunk neon haze — dark base with subtle magenta/cyan depth */
+function NeonHazeBackground() {
   return (
     <>
       <mesh position={[0, 0, -4.5]} scale={[24, 24, 1]}>
         <planeGeometry args={[1, 1]} />
-        <meshBasicMaterial
-          color="#080508"
-          transparent
-          opacity={1}
-        />
+        <meshBasicMaterial color="#050308" transparent opacity={1} />
       </mesh>
       <mesh position={[0, 0, -4]} scale={[20, 20, 1]}>
         <planeGeometry args={[1, 1]} />
         <meshStandardMaterial
-          color="#0d080c"
-          emissive="#1c0a14"
-          emissiveIntensity={0.22}
+          color="#0a060c"
+          emissive="#1a0820"
+          emissiveIntensity={0.28}
           roughness={1}
           metalness={0}
         />
@@ -60,11 +56,11 @@ function VelvetBackground() {
   )
 }
 
-/** Moody cinematic lighting: deep shadows, strong red glow accents */
+/** Cyberpunk neon haze lighting: deep shadows, cyan/magenta rim, red accent */
 function Lighting() {
   return (
     <>
-      {/* Key: strong from above/side for sharp cheekbones and depth */}
+      {/* Key: strong from above/side for sharp cheekbones and dominatrix presence */}
       <directionalLight
         position={[2.8, 4.2, 2]}
         intensity={1.7}
@@ -81,10 +77,14 @@ function Lighting() {
       />
       {/* Fill: soft, avoid crushed blacks */}
       <directionalLight position={[-2.2, 1.8, 2]} intensity={0.22} />
-      {/* Moody red glow — rim and accent */}
-      <pointLight position={[-2.2, 1.4, 1.2]} color="#ff2a2a" intensity={0.65} distance={9} />
-      <pointLight position={[2.2, 1.2, 0.6]} color="#ff3333" intensity={0.35} distance={7} />
-      <pointLight position={[0, -0.2, 2]} color="#661a1a" intensity={0.2} distance={6} />
+      {/* Neon haze — cyan rim (cyberpunk) */}
+      <pointLight position={[-2.4, 1.2, 1]} color="#00eeff" intensity={0.5} distance={9} />
+      <pointLight position={[2.4, 1.0, 0.8]} color="#00ccff" intensity={0.28} distance={7} />
+      {/* Magenta accent — stepping into the neon haze */}
+      <pointLight position={[0, 1.4, 1.8]} color="#ff22aa" intensity={0.35} distance={8} />
+      <pointLight position={[0, -0.2, 2]} color="#661a2a" intensity={0.18} distance={6} />
+      {/* Red accent — keep moody dominatrix edge */}
+      <pointLight position={[-2.2, 1.4, 1.2]} color="#ff2a2a" intensity={0.4} distance={9} />
       <ambientLight intensity={0.06} />
     </>
   )
@@ -114,13 +114,14 @@ export function Scene() {
   const preset = PRESETS[viewIndex]
   return (
     <>
-      <color attach="background" args={['#080508']} />
-      <fog attach="fog" args={['#0a0709', 4, 13]} />
+      <color attach="background" args={['#050308']} />
+      {/* Neon haze fog — subtle magenta/cyan tint in the distance */}
+      <fog attach="fog" args={['#120818', 4, 14]} />
       <ToneMapping />
       <CameraRig preset={preset} />
       {/* Phase 1: dark studio HDRI, low intensity so velvet background dominates */}
       <Environment preset="night" intensity={0.15} />
-      <VelvetBackground />
+      <NeonHazeBackground />
       <Lighting />
       <Avatar />
     </>

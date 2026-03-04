@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "kilocode.kilo-code",
+    "dbaeumer.vscode-eslint",
+    "dsznajder.es7-react-js-snippets"
+  ],
+  "unwantedRecommendations": []
+}
