@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+*.local
+
+# Logs and caches
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.cache/
+.eslintcache
+*.tsbuildinfo
+
+# Editor and OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Environment and secrets (never commit)
+.env
+.env.local
+.env.*.local
+*.pem
+
+# Optional: keep Cursor rules if you want them versioned (no entry = tracked)
+# .cursor/ is not ignored so project rules are saved with the repo

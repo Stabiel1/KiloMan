@@ -1,0 +1,12 @@
+---
+description: Black Lotus Goddess — R3F/Three.js and React conventions
+alwaysApply: true
+---
+
+# Project Conventions
+
+- **Comments:** Add JSDoc or brief comments for pose, lighting, and material intent. Preserve existing comments when editing.
+- **Exports:** Named exports for components (`export function X()`). Default export only for `App` in `App.tsx`.
+- **Three/R3F:** Use R3F declarative props. Keep material configs as shared objects at file or component top.
+- **Quality:** Run `npm run lint` and `npm run build` after changes; fix all errors.
+- **Docs:** Keep `AGENTS.md` updated when adding components or changing architecture.
