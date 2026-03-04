@@ -119,7 +119,7 @@ export function Scene() {
       <fog attach="fog" args={['#120818', 4, 14]} />
       <ToneMapping />
       <CameraRig preset={preset} />
-      {/* Phase 1: dark studio HDRI, low intensity so velvet background dominates */}
+      {/* Phase 1: dark studio HDRI, low intensity so neon-haze background dominates */}
       <Environment preset="night" intensity={0.15} />
       <NeonHazeBackground />
       <Lighting />
