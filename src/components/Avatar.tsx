@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { useFrame } from '@react-three/fiber'
 import { Group } from 'three'
 import { Outfit } from './Outfit'
 import { Hair } from './Hair'
@@ -6,16 +7,26 @@ import { MakeupDecals } from './face/MakeupDecals'
 
 const skin = { color: '#e8c4a8', roughness: 0.75, metalness: 0 }
 
+/** Phase 1: Avatar alive — subtle idle breathing for presence. Managed by Anna. */
+const BREATH_AMPLITUDE = 0.008
+const BREATH_SPEED = 0.6
+
 /**
  * Avatar: strong commanding pose — hand on hip, low-angle emphasis.
  * Iggy-inspired: sharp presence, confident gaze. R3F + Three.js.
  *
- * Phase 1 Option B: placeholder body (capsules/spheres). Option A: load base
- * female GLTF from public/models/avatar-base.glb via Drei useGLTF, apply same
- * skin/material, attach Outfit + Hair + MakeupDecals; see public/models/README.md.
+ * Phase 1: placeholder body with idle breathing. Option A: load base
+ * female GLTF from public/models/avatar-base.glb via Drei useGLTF.
  */
 export function Avatar() {
   const groupRef = useRef<Group>(null)
+
+  useFrame(() => {
+    if (!groupRef.current) return
+    const t = performance.now() * 0.001 * BREATH_SPEED
+    const s = 1 + Math.sin(t) * BREATH_AMPLITUDE
+    groupRef.current.scale.set(s, s, s)
+  })
 
   return (
     <group ref={groupRef} position={[0, -0.5, 0]} scale={1}>
