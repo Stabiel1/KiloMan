@@ -1,20 +1,23 @@
 # Black Lotus Goddess — Project & Agent Guide
 
+AGENTS.md standard — compatible with Kilo Code, Cursor, and Windsurf. AI agents should follow these instructions when working on this codebase.
+
 **Role:** You are helping maintain and extend this project. Keep this file and the codebase updated, commented, and correct.
 
 ## Project overview
 
 - **Name:** black-lotus-goddess  
 - **Stack:** React 18, TypeScript, Vite, React Three Fiber (R3F), Three.js, @react-three/drei  
-- **Purpose:** 3D avatar viewer — Iggy-inspired figure with low-angle camera, moody lighting, platinum hair, black outfit, and makeup decals. Phase 1: avatar alive (idle breathing). Managed by Anna.
+- **Purpose:** 3D avatar viewer — Iggy-inspired figure with low-angle camera, cyberpunk neon-haze lighting, platinum hair, black outfit, makeup decals, and performance mic (“click that mic”). Dominatrix/femdom presence. Phase 1: avatar alive (idle breathing). Managed by Anna.
 
 ## Structure
 
 - `src/App.tsx` — Root: full-viewport Canvas, camera, renders `<Scene />`.
-- `src/components/Scene.tsx` — Scene graph: background, fog, tone mapping, camera rig, lighting, `<Avatar />`.
-- `src/components/Avatar.tsx` — Figure: head, neck, torso, arms (hand-on-hip pose), hips, legs; composes `<Outfit />`, `<Hair />`, `<MakeupDecals />`.
+- `src/components/Scene.tsx` — Scene graph: neon-haze background/fog, tone mapping, camera rig, cyberpunk lighting (cyan/magenta/red), `<Avatar />`.
+- `src/components/Avatar.tsx` — Figure: head, neck, torso, arms (hand-on-hip + mic in left hand), hips, legs; composes `<Outfit />`, `<Hair />`, `<Mic />`, `<MakeupDecals />`.
 - `src/components/Outfit.tsx` — Choker, top, long gloves, stiletto boots (black fabric/leather).
 - `src/components/Hair.tsx` — Platinum blonde hair (sphere + box strands).
+- `src/components/Mic.tsx` — Performance mic in left hand (vintage-style, subtle neon ring).
 - `src/components/face/MakeupDecals.tsx` — Beauty mark, lipstick, winged eyeliner on head sphere.
 
 ## Conventions (keep code consistent)
@@ -45,3 +48,8 @@
 - `npm run lint` — ESLint  
 - `npm run preview` — Preview production build  
 - `npm audit` — Check dependencies for known vulnerabilities  
+
+## AI Agents (Kilo Code, Cursor, Windsurf)
+
+- **Kilo Code:** Install via `code --install-extension kilocode.kilo-code` or use the VS Code marketplace. Project rules in `.kilocode/rules/`.
+- **AGENTS.md:** This file is the shared standard. Kilo Code, Cursor, and Windsurf all load it for project context.
