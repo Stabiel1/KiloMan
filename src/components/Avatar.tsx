@@ -3,7 +3,6 @@ import { useFrame } from '@react-three/fiber'
 import { Group } from 'three'
 import { Outfit } from './Outfit'
 import { Hair } from './Hair'
-import { Mic } from './Mic'
 import { MakeupDecals } from './face/MakeupDecals'
 
 const skin = { color: '#e8c4a8', roughness: 0.75, metalness: 0 }
@@ -15,9 +14,8 @@ const BREATH_SPEED = 0.6
 /**
  * Avatar: strong commanding pose — hand on hip, low-angle emphasis.
  * Iggy-inspired: sharp presence, confident gaze. R3F + Three.js.
- *
- * Phase 1: placeholder body with idle breathing. Option A: load base
- * female GLTF from public/models/avatar-base.glb via Drei useGLTF.
+ * Placeholder body with idle breathing. Option A: load base female GLTF
+ * from public/models/avatar-base.glb via Drei useGLTF.
  */
 export function Avatar() {
   const groupRef = useRef<Group>(null)
@@ -50,15 +48,12 @@ export function Avatar() {
           <cylinderGeometry args={[0.19, 0.21, 0.5, 16]} />
           <meshStandardMaterial {...skin} />
         </mesh>
-        {/* Left arm — relaxed at side; mic in hand — "click that mic" */}
+        {/* Left arm — relaxed at side */}
         <group position={[-0.26, -0.08, 0]}>
           <mesh castShadow receiveShadow>
             <cylinderGeometry args={[0.048, 0.05, 0.36, 12]} />
             <meshStandardMaterial {...skin} />
           </mesh>
-          <group position={[-0.02, -0.26, 0.05]}>
-            <Mic />
-          </group>
         </group>
         {/* Right arm — bent, hand on hip */}
         <group position={[0.18, -0.12, 0.06]}>
