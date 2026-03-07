@@ -1,7 +1,5 @@
 # Black Lotus Goddess — Project & Agent Guide
 
-AGENTS.md standard — compatible with Kilo Code, Cursor, and Windsurf. AI agents should follow these instructions when working on this codebase.
-
 **Role:** You are helping maintain and extend this project. Keep this file and the codebase updated, commented, and correct.
 
 ## Project overview
