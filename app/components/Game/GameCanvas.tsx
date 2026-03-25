@@ -69,7 +69,6 @@ const GameCanvas: React.FC<GameCanvasProps> = ({ gameState, setGameState, jumpMo
   // Initialize Input Listeners
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      console.log('Key Down:', e.code);
       keysRef.current[e.code] = true;
       if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.code)) {
         e.preventDefault();
@@ -285,7 +284,6 @@ const GameCanvas: React.FC<GameCanvasProps> = ({ gameState, setGameState, jumpMo
   // --- GAME LOOP ---
 
   const update = () => {
-    console.log('Update - Game State:', gameState, 'Keys:', Object.keys(keysRef.current).filter(k => keysRef.current[k]));
     if (gameState !== 'playing') return;
 
     const player = playerRef.current;
@@ -298,12 +296,10 @@ const GameCanvas: React.FC<GameCanvasProps> = ({ gameState, setGameState, jumpMo
     
     // Horizontal Movement
     if (keys['ArrowLeft']) {
-      console.log('Moving Left');
       player.vx -= CONFIG.moveSpeed;
       player.facing = -1;
     }
     if (keys['ArrowRight']) {
-      console.log('Moving Right');
       player.vx += CONFIG.moveSpeed;
       player.facing = 1;
     }
