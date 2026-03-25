@@ -24,3 +24,4 @@ See `package.json` `scripts` for the canonical list:
 - The game is entirely client-side (HTML5 Canvas + React). There are no automated integration/e2e tests in the repo; manual browser testing via `computerUse` is the way to verify gameplay changes.
 - All game logic lives under `app/components/Game/`. The entry point is `app/page.tsx` which renders `GameContainer`.
 - The dev server supports hot reload — file edits are reflected immediately without restart.
+- `npm run build` may fail in the cloud VM due to network restrictions blocking Google Fonts (`next/font/google` in `app/layout.tsx`). The dev server (`npm run dev`) works fine — it handles font fetching lazily at request time rather than at build time. Use `npm run dev` for development and testing.
